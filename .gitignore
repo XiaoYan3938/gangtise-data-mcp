@@ -1,2 +1,7 @@
 upload.sh
 local_start.sh
+.vscode
+__pycache__
+test*
+.DS_Store
+.venv
