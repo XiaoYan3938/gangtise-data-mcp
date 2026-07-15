@@ -1,61 +1,59 @@
 # HTTP / SSE / OAuth
 
-**简体中文** | [English](http-sse.en.md)
+[简体中文](http-sse.cn.md) | **English**
 
-远程 MCP 传输与鉴权说明。客户端示例默认连接整合服务（`gangtise_mcp` / gateway 的 `/mcp`）。账号：[开放平台](https://open-platform.gangtise.com/)。
+Remote MCP transport and auth. Client examples target the combined service (`gangtise_mcp` / gateway `/mcp`). Credentials: [open platform](https://open-platform.gangtise.com/).
 
 ---
 
-## 传输
+## Transport
 
-| 模式 | 端点 |
-|------|------|
-| streamable-http | `POST /mcp`（网关可为 `/mcp/{slug}`） |
+| Mode | Endpoint |
+|------|----------|
+| streamable-http | `POST /mcp` (gateway may use `/mcp/{slug}`) |
 | SSE | `GET /sse` + `POST /messages/` |
 
-整合网关健康检查：`GET /health`。
+Gateway health: `GET /health`.
 
 ---
 
 <details>
-<summary><b>OAuth（推荐远程客户端）</b></summary>
+<summary><b>OAuth (recommended for remote clients)</b></summary>
 
-环境变量：
+Env:
 
 - `GTS_JWT_SECRET` — JWT HMAC
-- `GTS_CRED_ENC_KEY` — Fernet（`python -c "from cryptography.fernet import Fernet; print(Fernet.generate_key().decode())"`）
-- 可选 `GTS_OAUTH_ISSUER=https://your-host`（反代 HTTPS 时建议设置）
+- `GTS_CRED_ENC_KEY` — Fernet (`python -c "from cryptography.fernet import Fernet; print(Fernet.generate_key().decode())"`)
+- Optional `GTS_OAUTH_ISSUER=https://your-host` (set behind HTTPS reverse proxy)
 
-| 路径 | 说明 |
+| Path | Role |
 |------|------|
 | `/.well-known/oauth-authorization-server` | AS metadata |
 | `/.well-known/oauth-protected-resource` | PRM |
-| `/authorize` | 同意页（填写 AK/SK） |
+| `/authorize` | Consent page (AK/SK) |
 | `/token` | authorization_code / refresh_token |
-| `/register` | 动态客户端注册（公开客户端） |
+| `/register` | Dynamic client registration (public clients) |
 
-客户端完成 OAuth 后带 `Authorization: Bearer <access_token>`。  
-access **1 小时**，refresh **30 天**；刷新由 **MCP 客户端**完成。服务端解密 AK/SK 后仍走 `loginV2`。
+After OAuth, send `Authorization: Bearer <access_token>`.  
+Access **1h**, refresh **30d** (refreshed by the **MCP client**). Server decrypts AK/SK and uses existing `loginV2`.
 
 </details>
 
 <details>
-<summary><b>请求头 AK/SK（兼容）</b></summary>
+<summary><b>Header AK/SK (legacy-compatible)</b></summary>
 
 ```http
 X-GTS-Credentials: {"accessKey":"...","secretKey":"..."}
 ```
 
-或分头 `accessKey` / `secretKey`。
+Or separate `accessKey` / `secretKey` headers.
 
-未带凭证时可完成握手与 `tools/list`；调用工具时返回引导文案（含开放平台链接）。
+Without credentials, handshake and `tools/list` still work; tool calls return guidance with the open-platform link.
 
 </details>
 
 <details>
-<summary><b>客户端连接示例</b></summary>
-
-Cursor / 多数支持 URL 的客户端：
+<summary><b>Client connection example</b></summary>
 
 ```json
 {
@@ -67,12 +65,10 @@ Cursor / 多数支持 URL 的客户端：
 }
 ```
 
-支持 MCP OAuth 时连接后打开 `/authorize`。WorkBuddy 等本地配置见 [仓库 README](../README.md)。
-
-stdio 本地安装默认用环境变量 AK/SK，见推荐包 [`gangtise_mcp`](../mcp/gangtise_mcp/)。
+OAuth-capable clients open `/authorize` after connect. Local stdio: see recommended [`gangtise_mcp`](../mcp/gangtise_mcp/README.md).
 
 </details>
 
 ---
 
-相关：[Docker 部署](docker-deploy.md) · [总览](../README.md)
+See also: [Docker](docker-deploy.md) · [Overview](../README.md)
