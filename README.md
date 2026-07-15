@@ -36,10 +36,12 @@
 
 💬 _对话 / 编程助手_
 
+> **建议**：Cursor、WorkBuddy、Claude、VS Code（含 Copilot / Agent）等带智能体的客户端，优先将下方 MCP 配置 JSON 发给智能体完成安装；亦可手动写入对应配置文件。
+
 <details>
 <summary><b>Install in Cursor</b></summary>
 
-编辑 `~/.cursor/mcp.json` 或项目内 `.cursor/mcp.json`：
+1. 将下方 MCP 配置 JSON 发给 Cursor **Agent**（可附带真实 `GTS_ACCESS_KEY` / `GTS_SECRET_KEY`），请其完成安装：
 
 ```json
 {
@@ -47,7 +49,7 @@
     "gangtise": {
       "command": "uvx",
       "args": [
-                "--default-index",
+        "--default-index",
         "https://pypi.tuna.tsinghua.edu.cn/simple",
         "--with",
         "git+https://gitee.com/yanxi3938/gangtise-data-mcp#subdirectory=mcp/gangtise_agent",
@@ -72,7 +74,21 @@
 }
 ```
 
-保存后在 Settings → Tools & MCP 确认状态为绿色。远程 URL 连接见 [docs/http-sse.md](docs/http-sse.md)。
+![将 MCP JSON 发给 Cursor Agent 安装](assets/init_with_cursor.png)
+
+2. 若出现改动确认提示，点击 **Accept**：
+
+![接受 Agent 对 mcp.json 的修改](assets/accept_edit.png)
+
+3. 按菜单路径打开设置：**Cursor → Preferences → Cursor Settings**：
+
+![打开 Cursor Settings](assets/check_mcp.png)
+
+4. 进入 **Tools & MCP**，查看安装状态；若未开启则开启（首次启动可能需等待依赖拉取）：
+
+![在 Tools & MCP 中查看并开启](assets/check_mcp_status.png)
+
+亦可手动编辑 `~/.cursor/mcp.json` 或项目内 `.cursor/mcp.json`（内容同上）。远程 URL 连接见 [docs/http-sse.md](docs/http-sse.md)。
 
 </details>
 
@@ -81,8 +97,7 @@
 
 官方说明见 [WorkBuddy MCP 指南](https://www.codebuddy.cn/docs/workbuddy/From-Beginner-to-Expert-Guide/Function-Description/MCP-Guide)。推荐接入 **`gangtise_mcp`**。
 
-1. 将下方 MCP 配置 JSON（先填好 `GTS_ACCESS_KEY` / `GTS_SECRET_KEY`）发给 WorkBuddy **智能体**，请其完成 MCP 安装。
-2. 安装完成后，打开侧边栏 **专家 · 技能 · 连接器** → 顶部 **连接器** → **自定义连接器** / **我的 MCP**，对 `gangtise_mcp` 依次 **信任** 并 **开启**（首次信任可能等待数秒拉取依赖）。
+1. 将下方 MCP 配置 JSON 发给 WorkBuddy **智能体**（可附带真实 `GTS_ACCESS_KEY` / `GTS_SECRET_KEY`），请其完成 MCP 安装：
 
 ```json
 {
@@ -115,6 +130,16 @@
 }
 ```
 
+![将 MCP JSON 发给 WorkBuddy 智能体安装](assets/init_with_workbuddy.png)
+
+2. 安装完成后，打开侧边栏 **专家 · 技能 · 连接器** → 顶部 **连接器** → **自定义连接器** / **我的 MCP**：
+
+![定位自定义连接器 / 我的 MCP](assets/connector_locatin.png)
+
+3. 在 **我的 MCP** 中对 `gangtise_mcp`  **信任** gangtise_mcp（首次信任可能等待数秒拉取依赖）：
+
+![信任并开启 gangtise_mcp](assets/trust_mcp.png)
+
 远程 HTTP：在支持 URL 的连接器配置中填写 `https://<host>:<port>/mcp`（见 [docs/http-sse.md](docs/http-sse.md)）。
 
 </details>
@@ -122,7 +147,7 @@
 <details>
 <summary><b>Install in Claude Desktop</b></summary>
 
-安装 [uv](https://docs.astral.sh/uv/) 后，编辑 Claude Desktop 的 `claude_desktop_config.json`：
+推荐：将下方 MCP 配置 JSON 发给 Claude **智能体 / 对话**，请其写入 MCP 配置并完成安装（可附带真实 AK/SK）。亦可手动编辑 `claude_desktop_config.json`（内容相同）。需已安装 [uv](https://docs.astral.sh/uv/)：
 
 ```json
 {
@@ -160,6 +185,8 @@
 <details>
 <summary><b>Install in Claude Code</b></summary>
 
+推荐：将 MCP 配置 JSON（与 Cursor / Claude Desktop 示例相同）发给 Claude Code **智能体**，请其完成安装。亦可使用 CLI：
+
 ```bash
 claude mcp add gangtise -- uvx \
   --default-index https://pypi.tuna.tsinghua.edu.cn/simple \
@@ -179,7 +206,7 @@ claude mcp add gangtise -- uvx \
 <details>
 <summary><b>Install in VS Code</b></summary>
 
-在工作区创建 `.vscode/mcp.json`：
+推荐：在 Copilot Chat / Agent 等对话中粘贴下方 JSON，请智能体写入工作区 `.vscode/mcp.json` 并完成安装。亦可手动创建该文件：
 
 ```json
 {

@@ -25,7 +25,7 @@
 
 账号：[开放平台](https://open-platform.gangtise.com/)。需安装 [uv](https://docs.astral.sh/uv/)。
 
-**Cursor** — 写入 `~/.cursor/mcp.json` 或项目 `.cursor/mcp.json`：
+**Cursor** — 推荐将下方 JSON 发给 Cursor **Agent** 由其安装（改动出现时 Accept），再在 Settings → Tools & MCP 确认；亦可手动写入 `~/.cursor/mcp.json` 或项目 `.cursor/mcp.json`：
 
 ```json
 {
@@ -50,7 +50,7 @@
 }
 ```
 
-**WorkBuddy**：将 MCP 配置 JSON 发给 WorkBuddy **智能体**由其安装，再在 **我的 MCP** 中 **信任** 并 **开启**。推荐接入整合包，说明见 [`gangtise_mcp`](../gangtise_mcp/) 与 [仓库 README](../../README.md)。
+**WorkBuddy**：将 MCP 配置 JSON 发给 WorkBuddy **智能体**由其安装；安装完成后打开侧边栏 **专家 · 技能 · 连接器** → 顶部 **连接器** → **自定义连接器** / **我的 MCP**，对 `gangtise_mcp` 依次 **信任** 并 **开启**（首次信任可能等待数秒）。推荐接入整合包，说明见 [`gangtise_mcp`](../gangtise_mcp/) 与 [仓库 README](../../README.md)。
 
 
 推荐包完整平台折叠示例见 [`gangtise_mcp`](../gangtise_mcp/) 与 [仓库 README](../../README.md)。

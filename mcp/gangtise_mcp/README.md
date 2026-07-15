@@ -22,8 +22,12 @@
 
 ## 按平台安装
 
+> **建议**：带智能体的客户端优先将下方 MCP JSON 发给智能体安装；亦可手动写入配置文件。完整截图流程见 [仓库 README](../../README.md)。
+
 <details>
 <summary><b>Install in Cursor</b></summary>
+
+推荐：将下方 JSON 发给 Cursor **Agent** 安装 → 提示时 **Accept** → **Cursor → Preferences → Cursor Settings** → **Tools & MCP** 查看状态，未开启则开启。截图流程见 [仓库 README](../../README.md)。亦可手动写入 `~/.cursor/mcp.json`：
 
 ```json
 {
@@ -64,14 +68,14 @@
 官方：[WorkBuddy MCP 指南](https://www.codebuddy.cn/docs/workbuddy/From-Beginner-to-Expert-Guide/Function-Description/MCP-Guide)。
 
 1. 将 MCP 配置 JSON（与上方 Cursor 示例相同，server 键名可用 `gangtise_mcp`；先填好 ak/sk）发给 WorkBuddy **智能体**，请其完成安装。
-2. 安装完成后，在 **我的 MCP** 中对 `gangtise_mcp` 依次 **信任** 并 **开启**（首次信任可能等待数秒）。
+2. 安装完成后，打开侧边栏 **专家 · 技能 · 连接器** → 顶部 **连接器** → **自定义连接器** / **我的 MCP**，对 `gangtise_mcp` 依次 **信任** 并 **开启**（首次信任可能等待数秒）。
 
 </details>
 
 <details>
 <summary><b>Install in Claude Desktop / Claude Code / VS Code</b></summary>
 
-写法与 [仓库 README「按平台安装」](../../README.md#按平台安装推荐gangtise_mcp) 相同，命令均为 `gangtise-mcp`，子目录 `api/gangtise_mcp` + `mcp/gangtise_mcp`（Gitee）。
+同样建议将 MCP JSON 发给对应平台的智能体完成安装。写法与 [仓库 README「按平台安装」](../../README.md#按平台安装推荐gangtise_mcp) 相同，命令均为 `gangtise-mcp`，子目录 `api/gangtise_mcp` + `mcp/gangtise_mcp`（Gitee）。
 
 </details>
 

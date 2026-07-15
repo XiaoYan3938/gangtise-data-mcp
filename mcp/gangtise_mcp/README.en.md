@@ -22,8 +22,12 @@ All leaf tools from five domains (~45) in one server. Prefer this package for da
 
 ## Install by platform
 
+> **Tip**: On clients with an agent, prefer pasting the MCP JSON into the agent to install. Full illustrated flows: [repo README](../../README.en.md).
+
 <details>
 <summary><b>Install in Cursor</b></summary>
+
+Prefer: send JSON to the Cursor **Agent** → **Accept** when prompted → **Cursor → Preferences → Cursor Settings** → **Tools & MCP** to check status and enable if needed. Screenshots: [repo README](../../README.en.md). Or write `~/.cursor/mcp.json` manually:
 
 ```json
 {
@@ -57,9 +61,19 @@ All leaf tools from five domains (~45) in one server. Prefer this package for da
 </details>
 
 <details>
+<summary><b>Install in WorkBuddy (Tencent CodeBuddy)</b></summary>
+
+1. Send the MCP JSON (same as Cursor; server key may be `gangtise_mcp`; fill in ak/sk) to the WorkBuddy **agent** to install.
+2. Then open sidebar **Expert · Skills · Connectors** → **Connectors** → **Custom connectors** / **My MCP**, **Trust** and enable `gangtise_mcp` (first trust may take a few seconds).
+
+Screenshots: [repo README](../../README.en.md).
+
+</details>
+
+<details>
 <summary><b>Install in Claude Desktop / Claude Code / VS Code</b></summary>
 
-Same patterns as the [repo README “Install by platform”](../../README.en.md#install-by-platform-recommended-gangtise_mcp): command `gangtise-mcp`, subdirectories `api/gangtise_mcp` + `mcp/gangtise_mcp` (GitHub).
+Prefer sending the MCP JSON to each platform’s agent. Same patterns as the [repo README “Install by platform”](../../README.en.md#install-by-platform-recommended-gangtise_mcp): command `gangtise-mcp`, subdirectories `api/gangtise_mcp` + `mcp/gangtise_mcp` (GitHub).
 
 </details>
 
