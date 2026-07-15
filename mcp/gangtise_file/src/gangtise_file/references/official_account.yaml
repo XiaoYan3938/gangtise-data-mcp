@@ -1,0 +1,58 @@
+name: official_account
+title: Official Account
+description: 检索金融公众号文章，可按账号、证券、行业、日期筛选；可选下载正文。
+parameters:
+  keyword:
+    type: string
+    description: 文章检索关键词，需为具体词条（如「泡泡玛特」），勿用白话问句
+  securities:
+    type: array
+    description: 证券列表，逗号分隔；可为名称、代码或拼音
+    items:
+      type: string
+  start_date:
+    type: string
+    description: "开始时间，YYYY-MM-DD 或 yyyy-MM-dd HH:mm:ss"
+  end_date:
+    type: string
+    description: 结束时间，格式同上
+  accounts:
+    type: array
+    description: 公众号 ID 或名称，逗号分隔；名称自动解析，多匹配时返回候选
+    items:
+      type: string
+  account_category_list:
+    type: array
+    description: 解析 accounts 名称时的公众号分类筛选，见下表；不传则含未分类公众号
+    items:
+      type: string
+  category_list:
+    type: array
+    description: 文章类型，英文 code 或中文，如 news,report 或 新闻资讯,报告类
+    items:
+      type: string
+  industry_list:
+    type: array
+    description: industry_list
+    items:
+      type: string
+  search_type:
+    type: integer
+    description: 1 标题搜索（默认），2 全文搜索
+  rank_type:
+    type: integer
+    description: 1 综合排序（默认），2 时间倒序
+  limit:
+    type: integer
+    description: 返回条数上限，默认 100，单页最大 50（自动分页）
+  download:
+    type: boolean
+    description: 检索后自动下载正文
+  download_types:
+    type: array
+    description: 下载格式，逗号分隔：txt（默认）、html
+    items:
+      type: string
+  output_dir:
+    type: string
+    description: 下载目录，建议绝对路径

@@ -1,0 +1,21 @@
+name: get_file
+title: Get File
+description: 按 file_id 与 file_type 下载检索结果中的单个文件（PDF 或 Markdown）。
+parameters:
+  file_id:
+    type: string
+    description: 文件ID
+    required: true
+  file_type:
+    type: string
+    description: 文件类型
+    required: true
+  download_type:
+    type: string
+    description: 单文件下载格式：pdf 或 markdown
+  output_dir:
+    type: string
+    description: 批量下载输出目录
+  title:
+    type: string
+    description: title

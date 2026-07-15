@@ -1,0 +1,4 @@
+name: get_institutions
+title: Get Institutions
+description: 检索卖方/买方等机构列表，返回机构 ID，供研报、观点等检索工具筛选使用。
+parameters:

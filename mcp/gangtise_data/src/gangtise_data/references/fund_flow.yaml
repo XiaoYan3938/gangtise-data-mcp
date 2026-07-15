@@ -1,0 +1,26 @@
+name: fund_flow
+title: Fund Flow
+description: 查询 A 股日资金流向（小/中/大/特大单及主力净流入），支持指定证券或全市场，输出 CSV。仅历史数据，不含实时。
+parameters:
+  securities:
+    type: array
+    description: 逗号分隔；可为证券名称、代码或拼音首字母。与 all_market 二选一
+    items:
+      type: string
+  start_date:
+    type: string
+    description: 开始日期 yyyy-MM-dd。非全市场不传时由接口默认（endDate 往前一年）。all_market 且与 end_date 均未指定时，默认当天并向前回退取数
+  end_date:
+    type: string
+    description: 结束日期 yyyy-MM-dd。非全市场不传时由接口取最新已入库交易日
+  limit:
+    type: integer
+    description: 单次请求最大返回行数，默认 5000，上限 10000
+  all_market:
+    type: boolean
+    description: 传入 securityList=["aShares"] 查询全市场 A 股。未指定 start_date/end_date 时默认查当天，无数据则逐日向前回退（最多 15 天）
+  field_list:
+    type: array
+    description: 指定字段英文名或中文名，逗号分隔；不传则默认返回全部净流入字段
+    items:
+      type: string

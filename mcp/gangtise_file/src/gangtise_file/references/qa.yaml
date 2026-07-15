@@ -1,0 +1,34 @@
+name: qa
+title: Qa
+description: 按证券拉取投资者问答（互动平台、电话会议、调研纪要），返回提问、回答、来源、问题类型及是否涉及重要信息；支持多维筛选。按 0.1 积分/条计费。
+parameters:
+  securities:
+    type: array
+    description: 证券名称或代码列表，必填
+    required: true
+    items:
+      type: string
+  start_date:
+    type: string
+    description: "开始时间，yyyy-MM-dd 或 yyyy-MM-dd HH:mm:ss"
+  end_date:
+    type: string
+    description: 结束时间，格式同上
+  source_list:
+    type: array
+    description: 问题来源，多选：conference（电话会议）、interactive（互动平台）、survey（调研纪要）；支持中文
+    items:
+      type: string
+  question_category_list:
+    type: array
+    description: 问题类型，多选；如 productAndBusiness、financialData 或中文「产品技术与业务布局」
+    items:
+      type: string
+  answer_important:
+    type: array
+    description: 是否涉及重要信息：1/是 仅重要；0/否 仅非重要；all 不过滤
+    items:
+      type: string
+  limit:
+    type: integer
+    description: 返回条数上限，默认 100，单页最大 500（自动分页）

@@ -1,0 +1,33 @@
+name: kb
+title: Kb
+description: 在内部知识库中按自然语言做向量检索，返回相关文本片段。若主要按类型/日期/证券筛文件列表，请用研报/公告等检索类工具。
+parameters:
+  query:
+    type: string
+    description: 检索查询语句
+    required: true
+  start_date:
+    type: string
+    description: 开始日期，如 2026-01-01
+  end_date:
+    type: string
+    description: 结束日期，如 2026-12-31
+  file_types:
+    type: array
+    description: 文件类型，逗号分隔。可选：研究报告,外资研报,内部报告,AI云盘,首席观点,公司公告,产业公众号,会议纪要,调研纪要,网络纪要
+    items:
+      type: string
+  limit:
+    type: integer
+    description: 返回结果数量上限
+  download:
+    type: boolean
+    description: 是否下载文件
+  output_dir:
+    type: string
+    description: 下载文件保存路径
+  download_types:
+    type: array
+    description: 下载文件类型，逗号分隔。可选：pdf, markdown
+    items:
+      type: string

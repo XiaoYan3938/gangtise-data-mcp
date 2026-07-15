@@ -1,0 +1,12 @@
+name: research_outline
+title: Research Outline
+description: 为指定股票生成深度研究大纲，覆盖行业、公司、财务、估值、催化剂等章节结构，可作为撰写长篇研报的骨架。
+parameters:
+  security:
+    type: string
+    description: 单个证券名称或代码（推荐名称，如 贵州茅台；或代码 600519.SH）
+  securities:
+    type: array
+    description: 多个证券名称或代码，逗号分隔；与 security 可同时使用并去重合并
+    items:
+      type: string

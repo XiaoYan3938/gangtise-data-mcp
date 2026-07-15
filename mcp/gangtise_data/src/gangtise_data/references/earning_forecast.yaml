@@ -1,0 +1,19 @@
+name: earning_forecast
+title: Earning Forecast
+description: 拉取券商一致预期盈利预测，支持多指标与日期区间筛选，输出 CSV，适用于盈利预测与共识对比分析。
+parameters:
+  securities:
+    type: string
+    description: 逗号分隔；可为证券名称、代码或拼音首字母
+    required: true
+  start_date:
+    type: string
+    description: 开始日期 yyyy-MM-dd；默认今天
+  end_date:
+    type: string
+    description: 结束日期 yyyy-MM-dd；默认今天
+  consensus_list:
+    type: array
+    description: 一致预期指标，逗号分隔；不传默认返回全部
+    items:
+      type: string

@@ -1,0 +1,42 @@
+"""合并五域叶子工具（运行时从各域 mcp 包导入，无内嵌副本）。"""
+from __future__ import annotations
+
+from typing import Any, Callable, Dict, List
+
+from gangtise_agent import tools_registry as _agent_reg
+from gangtise_data import tools_registry as _data_reg
+from gangtise_file import tools_registry as _file_reg
+from gangtise_kb import tools_registry as _kb_reg
+from gangtise_private import tools_registry as _private_reg
+
+ToolHandler = Callable[..., Any]
+
+TOOL_HANDLERS: Dict[str, ToolHandler] = {}
+DOMAIN_TOOL_NAMES: Dict[str, List[str]] = {}
+
+DOMAIN_TOOL_NAMES["gangtise-agent"] = list(_agent_reg.TOOL_HANDLERS)
+TOOL_HANDLERS.update(_agent_reg.TOOL_HANDLERS)
+
+DOMAIN_TOOL_NAMES["gangtise-data"] = list(_data_reg.TOOL_HANDLERS)
+TOOL_HANDLERS.update(_data_reg.TOOL_HANDLERS)
+
+DOMAIN_TOOL_NAMES["gangtise-file"] = list(_file_reg.TOOL_HANDLERS)
+TOOL_HANDLERS.update(_file_reg.TOOL_HANDLERS)
+
+DOMAIN_TOOL_NAMES["gangtise-kb"] = list(_kb_reg.TOOL_HANDLERS)
+TOOL_HANDLERS.update(_kb_reg.TOOL_HANDLERS)
+
+DOMAIN_TOOL_NAMES["gangtise-private"] = list(_private_reg.TOOL_HANDLERS)
+TOOL_HANDLERS.update(_private_reg.TOOL_HANDLERS)
+
+INTERNAL_PARAMS = frozenset(
+    {
+        "headers",
+        "authorization",
+        "append_file_hint",
+        "meta",
+        "meta_by_id",
+        "indicator_meta",
+        "kwargs",
+    }
+)

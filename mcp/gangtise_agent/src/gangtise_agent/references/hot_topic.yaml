@@ -1,0 +1,27 @@
+name: hot_topic
+title: Hot Topic
+description: 获取热点话题报告列表（早报/午报/盘中快报/晚报），含驱动事件、投资逻辑、核心标的等结构化内容，可按日期区间与报告类型筛选。
+parameters:
+  page_from:
+    type: integer
+    description: 分页起始偏移，默认 0
+  page_size:
+    type: integer
+    description: 分页条数，默认 500，最大 500
+  start_date:
+    type: string
+    description: 开始日期，支持 yyyy-MM-dd
+  end_date:
+    type: string
+    description: 结束日期，支持 yyyy-MM-dd
+  category_list:
+    type: array
+    description: 报告类型：morning（早报）、noon（午报）、afternoon（盘中快报）、evening（晚报），逗号分隔
+    items:
+      type: string
+  with_related_securities:
+    type: boolean
+    description: 是否包含相关证券
+  with_close_reading:
+    type: boolean
+    description: 是否包含精读

@@ -1,0 +1,135 @@
+<div align="center">
+
+# Gangtise MCP (Recommended)
+
+[简体中文](README.md) | **English**
+
+All leaf tools from five domains (~45) in one server. Prefer this package for daily use; single-domain / hub packages are listed in the [repo overview](../../README.en.md).
+
+[Credentials](https://open-platform.gangtise.com/) · [HTTP / SSE](../../docs/http-sse.en.md) · [Docker](../../docs/docker-deploy.en.md)
+
+</div>
+
+---
+
+## Quick Start
+
+1. Get **AK / SK** from the [open platform](https://open-platform.gangtise.com/).
+2. Install [uv](https://docs.astral.sh/uv/).
+3. Wire `gangtise-mcp` into your client (examples below use GitHub).
+
+---
+
+## Install by platform
+
+<details>
+<summary><b>Install in Cursor</b></summary>
+
+```json
+{
+  "mcpServers": {
+    "gangtise": {
+      "command": "uvx",
+      "args": [
+                "--with",
+        "git+https://github.com/XiaoYan3938/gangtise-data-mcp#subdirectory=mcp/gangtise_agent",
+        "--with",
+        "git+https://github.com/XiaoYan3938/gangtise-data-mcp#subdirectory=mcp/gangtise_data",
+        "--with",
+        "git+https://github.com/XiaoYan3938/gangtise-data-mcp#subdirectory=mcp/gangtise_file",
+        "--with",
+        "git+https://github.com/XiaoYan3938/gangtise-data-mcp#subdirectory=mcp/gangtise_kb",
+        "--with",
+        "git+https://github.com/XiaoYan3938/gangtise-data-mcp#subdirectory=mcp/gangtise_private",
+        "--from",
+        "git+https://github.com/XiaoYan3938/gangtise-data-mcp#subdirectory=mcp/gangtise_mcp",
+        "gangtise-mcp"
+      ],
+      "env": {
+        "GTS_ACCESS_KEY": "YOUR_ACCESS_KEY",
+        "GTS_SECRET_KEY": "YOUR_SECRET_KEY"
+      }
+    }
+  }
+}
+```
+
+</details>
+
+<details>
+<summary><b>Install in Claude Desktop / Claude Code / VS Code</b></summary>
+
+Same patterns as the [repo README “Install by platform”](../../README.en.md#install-by-platform-recommended-gangtise_mcp): command `gangtise-mcp`, subdirectories `api/gangtise_mcp` + `mcp/gangtise_mcp` (GitHub).
+
+</details>
+
+<details>
+<summary><b>Remote HTTP / SSE</b></summary>
+
+```
+https://<host>:<port>/mcp
+```
+
+OAuth or `X-GTS-Credentials`: [http-sse.en.md](../../docs/http-sse.en.md).
+
+</details>
+
+<details>
+<summary><b>uvx CLI</b></summary>
+
+```bash
+uvx \
+  --with "git+https://github.com/XiaoYan3938/gangtise-data-mcp#subdirectory=mcp/gangtise_agent" \
+  --with "git+https://github.com/XiaoYan3938/gangtise-data-mcp#subdirectory=mcp/gangtise_data" \
+  --with "git+https://github.com/XiaoYan3938/gangtise-data-mcp#subdirectory=mcp/gangtise_file" \
+  --with "git+https://github.com/XiaoYan3938/gangtise-data-mcp#subdirectory=mcp/gangtise_kb" \
+  --with "git+https://github.com/XiaoYan3938/gangtise-data-mcp#subdirectory=mcp/gangtise_private" \
+  --from "git+https://github.com/XiaoYan3938/gangtise-data-mcp#subdirectory=mcp/gangtise_mcp" \
+  gangtise-mcp
+```
+
+</details>
+
+---
+
+<details>
+<summary><b>Tools</b></summary>
+
+All five-domain leaf tools (`quote`, `report`, `kb`, `stock_one_pager`, `stockpool`, …).  
+For progressive disclosure use [gangtise_hub](../gangtise_hub/); for one domain use the matching `mcp/gangtise_*` package.
+
+</details>
+
+<details>
+<summary><b>Docker</b></summary>
+
+All-in-one image only:
+
+```bash
+cd gangtise-data-mcp
+docker build -t gangtise-mcp -f Dockerfile .
+```
+
+Set `GTS_JWT_SECRET` / `GTS_CRED_ENC_KEY` for OAuth. See [docker-deploy.en.md](../../docs/docker-deploy.en.md).
+
+</details>
+
+
+<details>
+<summary><b>Run locally (dev)</b></summary>
+
+This MCP package depends on sibling [`api/gangtise_mcp`](../../api/gangtise_mcp/):
+
+```bash
+cd gangtise-data-mcp/mcp/gangtise_mcp
+uv sync
+uv run gangtise-mcp --help
+uv run gangtise-mcp                          # stdio
+uv run gangtise-mcp --transport http --port 8000
+```
+
+CLI: [`cli/gangtise_mcp`](../../cli/gangtise_mcp/). Recommended client package: [`gangtise_mcp`](../gangtise_mcp/).
+
+</details>
+
+Chinese: [README.md](README.md) · Overview: [../../README.en.md](../../README.en.md)

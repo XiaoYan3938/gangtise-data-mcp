@@ -1,0 +1,14 @@
+name: concept
+title: Concept
+description: 查询题材指数画像：定义、投资逻辑、行业空间、竞争格局、催化事件，以及按分组展示的成分股（含重点个股与纳入理由）。输出 Markdown 便于阅读。query_type 支持 info（仅画像）/ securities（仅成分股）/ all（默认，两者兼有）。多题材批量查询时各题材以 --- 分隔；未配置字段会省略对应章节。
+parameters:
+  concepts:
+    type: string
+    description: 题材 ID 或名称，逗号分隔。纯字母数字视为 ID；否则 search，唯一完全匹配时自动查询
+    required: true
+  query_type:
+    type: string
+    description: 查询类型，默认 all。可选：info（仅基本信息）、securities（仅成分股）、all（两者都查）
+  top:
+    type: integer
+    description: 名称搜索返回条数上限，默认 10，最大 10（非纯 ID 时生效）

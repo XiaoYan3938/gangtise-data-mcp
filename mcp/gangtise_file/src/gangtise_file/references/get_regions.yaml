@@ -1,0 +1,4 @@
+name: get_regions
+title: Get Regions
+description: 返回外资研报/观点支持的地区代码列表。
+parameters:

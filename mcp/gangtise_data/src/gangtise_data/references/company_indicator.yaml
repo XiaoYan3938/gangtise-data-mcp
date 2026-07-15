@@ -1,0 +1,30 @@
+name: company_indicator
+title: Company Indicator
+description: |
+  检索或拉取 A 股公司指标（EDE）：行情、三大财报科目、财务比率、分红、盈利预测、公司/证券属性（含 scr_concept 证券所属概念）等。仅 keyword 时免费检索；indicator_codes + securities 时取数（收费）。产品销量请用 industry_indicator；券商一致预期请用 earning_forecast。财报截面日期用季度末；日频行情不含当天实时。
+  
+  - 行情指标：日收盘价、成交量、涨跌幅、换手率、市值、成交额等。日频时序不含当天实时；结束日期通常取最近一个已收盘交易日
+  - 财务报表：利润表、资产负债表、现金流量表各科目，含 TTM/单季度/同比环比。取截面时 start_date / end_date 一般设为对应报告期季度末（见下文「日期与数据范围」）
+  - 财务比率：估值倍数（PE/PB/PS/PCF/PEG）、盈利能力（ROE/ROA/ROIC）、营运周转与天数、现金流质量等
+  - 分红指标：现金分红、股利支付率、股息率等
+  - 盈利预测：预测营收/归母净利润及同比、预测 PE/PEG 等。与 earning_forecast.py 的券商一致预期为不同接口
+  - 公司/证券属性：主营业务、注册地址、上市板块、上市日期、证券所属概念、总股本/流通股本等
+parameters:
+  keyword:
+    type: string
+    description: 检索关键词，须为具体指标词（如「收盘价」「成交量」「营业收入」「所属概念」），避免过于笼统的表述
+  indicator_codes:
+    type: string
+    description: 指标编码或名称，逗号分隔；提供后与 securities 一并传入则拉取数据
+  securities:
+    type: string
+    description: 证券逗号分隔：代码或名称（仅 A 股）
+  start_date:
+    type: string
+    description: 开始日期 yyyy-MM-dd。财报类截面指标通常设为报告期季度末（如 2026-03-31）；日频时序为区间起点，默认近一年
+  end_date:
+    type: string
+    description: 结束日期 yyyy-MM-dd。财报类截面常与 start_date 同为季度末；日频行情不含当天实时数据，默认最近已收盘日
+  params:
+    type: object
+    description: "JSON 参数字典：根级键为全局参数（如 adjustmentType 复权方式），嵌套指标编码可单独覆盖（如 {\"adjustmentType\":\"3\",\"qte_close\":{\"adjustmentType\":\"2\"}}）"

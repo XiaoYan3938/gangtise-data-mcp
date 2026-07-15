@@ -1,0 +1,25 @@
+name: industry_indicator
+title: Industry Indicator
+description: |
+  检索宏观/行业/大宗商品/产品类指标元信息，或按指标 ID 拉取时序数据（收费）。仅 keyword 时免费检索；indicator_ids 时取数。单次最多 10 个 ID，超出自动分批。产品销量仅在本工具；宏观默认中国；大宗商品避免泛用「价格」。
+  
+  - 宏观指标：各国 GDP、CPI、PPI 等。中国相关指标在名称中通常不含「中国」——若宏观指标名未提及国家，一般即为中国宏观指标
+  - 行业指标：各行各业，如原材料价格、航运指数等
+  - 大宗商品：黄金现货价，石油期权、期货等衍生品的结算价、收盘价等。检索时避免单独使用「价格」，应使用「现货价」「结算价」「收盘价」等更具体的关键词
+  - 产品指标：某具体产品的销量、产量等，如「新能源汽车销量」「空调销量」。不支持按公司拆分到各子品牌/车型的汇总查询（如「比亚迪分品牌销量」）；应先用知识库确认品牌/车型名称，再分别检索，例如「比亚迪 元plus 零售量」「比亚迪 海鸥 零售量」
+parameters:
+  keyword:
+    type: string
+    description: 检索关键词（如「空调」「新能源汽车销量」「黄金现货价」）。宏观默认中国；大宗商品避免单独用「价格」，宜用现货价/结算价/收盘价；产品销量不支持公司分品牌汇总，需拆成多个具体车型/品牌查询
+  indicator_ids:
+    type: string
+    description: 指标 ID 或名称，逗号分隔；提供后拉取时序数据。产品销量类数据仅本工具提供
+  start_date:
+    type: string
+    description: 时序开始日期 yyyy-MM-dd（get），默认约为结束日往前一年
+  end_date:
+    type: string
+    description: 时序结束日期 yyyy-MM-dd（get），默认今天
+  limit:
+    type: integer
+    description: search：检索条数上限，默认 10，最大 200。get：参与取数的指标数量上限（可大于 10，自动分批）

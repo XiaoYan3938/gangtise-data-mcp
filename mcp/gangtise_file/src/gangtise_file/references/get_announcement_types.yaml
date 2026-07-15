@@ -1,0 +1,7 @@
+name: get_announcement_types
+title: Get Announcement Types
+description: 返回公告分类树（A 股 cn 或港股 hk），用于 announcement 的 category_list 参数取值参考。
+parameters:
+  market:
+    type: string
+    description: 市场，可选：cn、hk

@@ -1,0 +1,40 @@
+name: financial
+title: Financial
+description: 拉取财务报表（利润表/资产负债表/现金流量表），支持报告期 Q1–Q4/Q0、累计/单季等粒度，输出 CSV。
+parameters:
+  securities:
+    type: string
+    description: 逗号分隔；可为证券名称、代码或拼音首字母
+    required: true
+  start_date:
+    type: string
+    description: 开始日期 yyyy-MM-dd。与 endDate 同时有值时覆盖 fiscalYear 的筛选（按接口规则）
+  end_date:
+    type: string
+    description: 结束日期 yyyy-MM-dd
+  fiscal_year:
+    type: array
+    description: 财报年度，逗号分隔，如 2025,2026。对应请求体 fiscalYear
+    items:
+      type: string
+  period:
+    type: array
+    description: 报告期：Q1 / Q2 / Q3 / Q4 / Q0，逗号分隔；默认 Q0，即最新一期
+    items:
+      type: string
+  report_type:
+    type: array
+    description: 报表类型，逗号分隔：consolidated / consolidatedRestated / standalone / standaloneRestated。默认 consolidated
+    items:
+      type: string
+  field_list:
+    type: array
+    description: 指定科目英文字段名，逗号分隔；不传则 fieldList=[] 取全部
+    items:
+      type: string
+  table_type:
+    type: string
+    description: 报表类型：income/利润表、balance/资产负债表、cashflow/现金流量表。默认 income
+  granularity:
+    type: string
+    description: 财报口径：accumulated（累计值，默认）/ quarterly（单季度值）。仅对 income、cashflow 生效；balance 仅支持 accumulated

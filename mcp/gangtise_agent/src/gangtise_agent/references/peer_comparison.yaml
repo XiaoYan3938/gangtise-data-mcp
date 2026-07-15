@@ -1,0 +1,12 @@
+name: peer_comparison
+title: Peer Comparison
+description: 对指定股票进行同业/可比公司对比，覆盖估值、盈利、成长、市场地位等维度，便于相对定价与赛道内排位判断。
+parameters:
+  security:
+    type: string
+    description: 单个证券名称或代码（推荐名称，如 贵州茅台；或代码 600519.SH）
+  securities:
+    type: array
+    description: 多个证券名称或代码，逗号分隔；与 security 可同时使用并去重合并
+    items:
+      type: string

@@ -1,0 +1,50 @@
+name: private_meeting
+title: Private Meeting
+description: 检索个人电话会议列表，或按 conference_ids 获取会议语音识别或 AI 速记内容。
+parameters:
+  keyword:
+    type: string
+    description: 会议标题关键词（search）
+  conference_ids:
+    type: string
+    description: 会议 ID 或标题，逗号分隔（提供后自动 get）
+  content_types:
+    type: array
+    description: asr / summary / both（get 模式，默认 both）
+    items:
+      type: string
+  start_time:
+    type: string
+    description: "起始时间，格式 yyyy-MM-dd 或 yyyy-MM-dd HH:mm:ss"
+  end_time:
+    type: string
+    description: "结束时间，格式 yyyy-MM-dd 或 yyyy-MM-dd HH:mm:ss"
+  security_list:
+    type: array
+    description: security_list
+    items:
+      type: string
+  institution_list:
+    type: array
+    description: institution_list
+    items:
+      type: string
+  research_area_list:
+    type: array
+    description: 研究方向 ID，逗号分隔
+    items:
+      type: string
+  category_list:
+    type: array
+    description: 会议类别：earningsCall 等，或中文（业绩会、策略会…）
+    items:
+      type: string
+  limit:
+    type: integer
+    description: search 列表条数上限（默认 100）
+  page_from:
+    type: integer
+    description: 分页，page-size 最大 50
+  page_size:
+    type: integer
+    description: 分页，page-size 最大 50

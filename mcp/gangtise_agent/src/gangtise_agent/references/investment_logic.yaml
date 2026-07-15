@@ -1,0 +1,12 @@
+name: investment_logic
+title: Investment Logic
+description: 梳理指定股票的投资逻辑，包括核心驱动、关键假设、风险点与验证路径，适用于撰写研报提纲或投委会材料前的逻辑整理。
+parameters:
+  security:
+    type: string
+    description: 单个证券名称或代码（推荐名称，如 贵州茅台；或代码 600519.SH）
+  securities:
+    type: array
+    description: 多个证券名称或代码，逗号分隔；与 security 可同时使用并去重合并
+    items:
+      type: string

@@ -1,0 +1,16 @@
+name: stockpool
+title: Stockpool
+description: 检索自选股池列表，或按 pool_ids / all_pools 获取池内成分股。
+parameters:
+  keyword:
+    type: string
+    description: 股票池名称或 ID 子串过滤（search）
+  pool_ids:
+    type: string
+    description: 池 ID 或名称，逗号分隔。仅字母数字与逗号时视为 ID 直接 get；否则 search，唯一完全匹配时自动 get
+  all_pools:
+    type: boolean
+    description: get 使用 poolIdList=["all"]（提供后自动 get）
+  limit:
+    type: integer
+    description: search 列出/过滤的股票池数量上限（默认 100）

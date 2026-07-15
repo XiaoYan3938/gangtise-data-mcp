@@ -1,0 +1,12 @@
+name: stock_one_pager
+title: Stock One Pager
+description: 生成单只或多只股票的「一页纸」投研摘要，整合基本面要点、近期催化与市场观点，适合快速了解标的全貌。支持证券名称（推荐）、简称、拼音或代码。
+parameters:
+  security:
+    type: string
+    description: 单个证券名称或代码（推荐名称，如 贵州茅台；或代码 600519.SH）
+  securities:
+    type: array
+    description: 多个证券名称或代码，逗号分隔；与 security 可同时使用并去重合并
+    items:
+      type: string

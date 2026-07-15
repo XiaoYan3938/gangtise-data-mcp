@@ -1,0 +1,35 @@
+name: private_cloud
+title: Private Cloud
+description: 检索个人云盘文件列表，或按 file_ids 获取文件正文。不含对话、AI 速记、AI 翻译文件夹；不消耗积分。
+parameters:
+  keyword:
+    type: string
+    description: 文件标题关键词（search）
+  file_ids:
+    type: string
+    description: 文件 ID 或标题，逗号分隔（提供后自动 get）
+  start_time:
+    type: string
+    description: "起始时间，格式 yyyy-MM-dd 或 yyyy-MM-dd HH:mm:ss"
+  end_time:
+    type: string
+    description: "结束时间，格式 yyyy-MM-dd 或 yyyy-MM-dd HH:mm:ss"
+  file_type_list:
+    type: array
+    description: document image media article other，或中文（文档、图片、音视频等）
+    items:
+      type: string
+  space_type_list:
+    type: array
+    description: 1 我的云盘、2 租户云盘（可传中文）
+    items:
+      type: string
+  limit:
+    type: integer
+    description: search 列表条数上限（默认 100）
+  page_from:
+    type: integer
+    description: 分页起始（从 0 开始）
+  page_size:
+    type: integer
+    description: 每页条数

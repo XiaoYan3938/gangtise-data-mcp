@@ -1,0 +1,4 @@
+name: get_chiefs
+title: Get Chiefs
+description: 检索首席分析师列表，支持按姓名、机构、团队组合搜索，返回候选 ID 与简介。
+parameters:

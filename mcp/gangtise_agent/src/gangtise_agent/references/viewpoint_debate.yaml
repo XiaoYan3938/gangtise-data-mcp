@@ -1,0 +1,15 @@
+name: viewpoint_debate
+title: Viewpoint Debate
+description: 围绕用户给出的投资观点（不超过 1000 字）生成正反方辩论式分析，帮助检验观点完备性与潜在反驳论据。可选关联合适标的。
+parameters:
+  viewpoint:
+    type: string
+    description: 投资观点文本，不超过 1000 字
+  security:
+    type: string
+    description: 单个证券名称或代码（推荐名称，如 贵州茅台；或代码 600519.SH）
+  securities:
+    type: array
+    description: 多个证券名称或代码，逗号分隔；与 security 可同时使用并去重合并
+    items:
+      type: string

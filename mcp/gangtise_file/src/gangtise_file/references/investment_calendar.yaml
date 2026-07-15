@@ -1,0 +1,65 @@
+name: investment_calendar
+title: Investment Calendar
+description: 检索投资日历活动：路演、调研、线下策略会、论坛等，按活动类型与时间筛选。
+parameters:
+  kind:
+    type: string
+    description: 投资日历活动类型
+    required: true
+  keyword:
+    type: string
+    description: 搜索关键词，可为空
+  start_date:
+    type: string
+    description: 开始日期 YYYY-MM-DD（转为 13 位时间戳 startTime）
+  end_date:
+    type: string
+    description: 结束日期 YYYY-MM-DD（结束日含全天，转为 endTime）
+  limit:
+    type: integer
+    description: 返回条数上限，默认见 FILE_DEFAULT_LIMIT["calendar"]
+  securities:
+    type: array
+    description: 证券列表，逗号分隔；可为证券名称、代码或拼音首字母
+    items:
+      type: string
+  institutions:
+    type: array
+    description: 牵头机构，逗号分隔，智能匹配 brokerId
+    items:
+      type: string
+  research_areas:
+    type: array
+    description: research_areas
+    items:
+      type: string
+  category_list:
+    type: array
+    description: earningsCall 业绩会、strategyMeeting 策略会、companyAnalysis 公司分析、industryAnalysis 行业分析、fundRoadshow 基金路演
+    items:
+      type: string
+  market_list:
+    type: array
+    description: aShares、hkStocks、usChinaConcept、usStocks
+    items:
+      type: string
+  participant_role_list:
+    type: array
+    description: management 高管、expert 专家
+    items:
+      type: string
+  broker_type_list:
+    type: array
+    description: cnBroker 中资卖方、otherBroker 外资卖方
+    items:
+      type: string
+  permission_list:
+    type: array
+    description: permission_list
+    items:
+      type: string
+  object_list:
+    type: array
+    description: company 公司调研、industry 行业调研
+    items:
+      type: string

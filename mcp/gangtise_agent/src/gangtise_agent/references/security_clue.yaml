@@ -1,0 +1,29 @@
+name: security_clue
+title: Security Clue
+description: 按证券或行业检索「证券线索」：聚合研报、纪要、公告、观点等来源的相关片段，用于快速搜集与标的相关的多源信息。
+parameters:
+  page_from:
+    type: integer
+    description: 分页起始偏移，默认 0
+  page_size:
+    type: integer
+    description: 分页条数，默认 500，最大 500
+  start_time:
+    type: string
+    description: "开始时间，支持 yyyy-MM-dd 或 yyyy-MM-dd HH:mm:ss"
+  end_time:
+    type: string
+    description: "结束时间，支持 yyyy-MM-dd 或 yyyy-MM-dd HH:mm:ss"
+  query_mode:
+    type: string
+    description: 查询方式：bySecurity（按证券）或 byIndustry（按行业）
+  securities:
+    type: array
+    description: 多个证券名称或代码，逗号分隔；与 security 可同时使用并去重合并
+    items:
+      type: string
+  source:
+    type: array
+    description: 来源多选：researchReport（研报）、conference（纪要）、announcement（公告）、view（观点）
+    items:
+      type: string

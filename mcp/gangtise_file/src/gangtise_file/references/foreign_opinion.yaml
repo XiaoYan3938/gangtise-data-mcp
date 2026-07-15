@@ -1,0 +1,63 @@
+name: foreign_opinion
+title: Foreign Opinion
+description: 检索外资/海外机构观点索引，支持地区、评级、证券与机构等筛选；可选下载。
+parameters:
+  source:
+    type: string
+    description: institution（默认）— 外资机构观点；independent — 外资独立观点
+  keyword:
+    type: string
+    description: 关键词
+  securities:
+    type: array
+    description: 证券列表，逗号分隔；经 security 解析为代码后传入 securityList
+    items:
+      type: string
+  start_date:
+    type: string
+    description: "开始时间；支持 YYYY-MM-DD（自动补 00:00:00）或 yyyy-MM-dd HH:mm:ss"
+  end_date:
+    type: string
+    description: "结束时间；支持 YYYY-MM-DD（自动补 23:59:59）或完整时间串"
+  institutions:
+    type: array
+    description: 券商关键词，逗号分隔，解析为 brokerList；仅 source institution 生效
+    items:
+      type: string
+  industries:
+    type: array
+    description: 行业关键词，逗号分隔，解析为行业 ID 列表
+    items:
+      type: string
+  region_list:
+    type: array
+    description: 区域关键词或代码，逗号分隔，解析为 regionList；仅 source institution 生效
+    items:
+      type: string
+  rating_list:
+    type: array
+    description: 评级：buy / overweight / neutral / underweight / sell
+    items:
+      type: string
+  rating_change_list:
+    type: array
+    description: 评级变动：upgrade / maintain / downgrade / initiate
+    items:
+      type: string
+  rank_type:
+    type: integer
+    description: 1 综合排序，2 时间倒序（默认 1）
+  limit:
+    type: integer
+    description: 返回条数上限，默认 100；单页最大 50，脚本内自动分页
+  download:
+    type: boolean
+    description: 检索后自动下载；仅对 source independent 有效（下载 HTML）。机构观点若指定 -d，脚本会提示无列表侧原文下载接口
+  download_types:
+    type: array
+    description: 仅独立观点下载：逗号分隔，默认 html。html — 原文 HTML（fileType=1）；zh / 中文 — 中文翻译 HTML（fileType=2）。与 get_file.py 一致
+    items:
+      type: string
+  output_dir:
+    type: string
+    description: 下载保存目录，建议绝对路径；须与 -d 同时使用

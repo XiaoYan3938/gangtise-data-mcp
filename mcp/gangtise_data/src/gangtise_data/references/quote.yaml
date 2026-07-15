@@ -1,0 +1,27 @@
+name: quote
+title: Quote
+description: 查询行情：日 K、分钟 K 或截面快照；支持前/后复权、全市场 cn/hk/us、日期区间，输出 CSV。分钟线不支持全市场与复权；缺复权因子的证券会单独按不复权返回，不影响其余标的。
+parameters:
+  securities:
+    type: array
+    description: 逗号分隔；可为证券名称、代码或拼音首字母。与 all_market_markets 二选一
+    items:
+      type: string
+  start_date:
+    type: string
+    description: 开始日期 yyyy-MM-dd。未指定时：非全市场默认近 7 日（至 end_date）；all_market_markets 且与 end_date 均未指定时默认当天并向前回退取数
+  end_date:
+    type: string
+    description: 结束日期 yyyy-MM-dd。未指定时默认今天
+  limit:
+    type: integer
+    description: 单次 K 线请求最大行数，默认 5000，上限 10000。复权因子请求同样受上限约束（脚本按月拆分）
+  all_market_markets:
+    type: string
+    description: 全市场：不带值默认 A 股(cn)；可指定 cn / hk / us，逗号分隔（如 cn,hk）。未指定 start_date/end_date 时默认查当天，无数据则逐日向前回退（最多 15 天）
+  data_type:
+    type: string
+    description: 行情类型：daily（日K）/ minute / snap
+  adjust_mode:
+    type: string
+    description: 仅日 K。forward / qfq / 前复权（默认）、backward / hfq / 后复权、none / raw / 不复权。分钟 K 忽略复权（勿显式传非 none）

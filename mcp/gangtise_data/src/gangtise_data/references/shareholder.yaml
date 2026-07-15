@@ -1,0 +1,28 @@
+name: shareholder
+title: Shareholder
+description: 查询股东结构：前十大股东或前十大流通股东，支持日期区间或财报年度筛选，输出 CSV。
+parameters:
+  securities:
+    type: string
+    description: 逗号分隔；可为证券名称、代码或拼音首字母
+    required: true
+  holder_type:
+    type: string
+    description: top10（前十大股东）或 top10Float（前十大流通股东）
+    required: true
+  start_date:
+    type: string
+    description: 开始日期 yyyy-MM-dd。仅传开始日期时，结束日期默认今天
+  end_date:
+    type: string
+    description: 结束日期 yyyy-MM-dd。仅传结束日期时，开始日期默认向前 3 年
+  fiscal_year:
+    type: array
+    description: 财报年度，逗号分隔，如 2024,2025
+    items:
+      type: string
+  period:
+    type: array
+    description: 报告期：q1 / interim / q3 / annual / latest，逗号分隔，默认 latest
+    items:
+      type: string

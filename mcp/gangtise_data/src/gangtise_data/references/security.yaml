@@ -1,0 +1,19 @@
+name: security
+title: Security
+description: 证券代码解析与搜索：按名称、简称、拼音或代码查询证券列表，用于确认标的代码与市场。
+parameters:
+  keyword:
+    type: string
+    description: 搜索关键词（名称、代码、拼音等），必填
+    required: true
+  category:
+    type: array
+    description: 证券品类过滤，如 stock、dr、index；可多选
+    items:
+      type: string
+  top:
+    type: integer
+    description: 检索返回条数上限
+  output_limit:
+    type: integer
+    description: output_limit

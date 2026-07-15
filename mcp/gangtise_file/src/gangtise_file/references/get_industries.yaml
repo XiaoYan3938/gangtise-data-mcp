@@ -1,0 +1,4 @@
+name: get_industries
+title: Get Industries
+description: 返回行业分类与研究领域映射表，供观点、纪要、日历等检索工具筛选时使用。
+parameters:
