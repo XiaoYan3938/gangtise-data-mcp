@@ -1,8 +1,8 @@
-# HTTP / SSE / OAuth
+# HTTP / SSE
 
 [简体中文](http-sse.cn.md) | **English**
 
-Remote MCP transport and auth. Client examples target the combined service (`gangtise_mcp` / gateway `/mcp`). Credentials: [open platform](https://open-platform.gangtise.com/).
+Remote MCP transport and auth (main). Clients connect to `POST /mcp`.
 
 ---
 
@@ -13,62 +13,65 @@ Remote MCP transport and auth. Client examples target the combined service (`gan
 | streamable-http | `POST /mcp` (gateway may use `/mcp/{slug}`) |
 | SSE | `GET /sse` + `POST /messages/` |
 
-Gateway health: `GET /health`.
+Health: `GET /health`.
+
+Responses echo `X-DashScope-Request-ID`. With `MCP_REQUIRE_AUTH=true`, `/mcp` without auth returns **401**. Tool schemas are flattened.
 
 ---
 
 <details>
-<summary><b>OAuth (recommended for remote clients)</b></summary>
+<summary><b>Auth (Authorization or AK/SK)</b></summary>
 
-Env:
+Two modes (**Authorization wins** if both present):
 
-- `GTS_JWT_SECRET` — JWT HMAC
-- `GTS_CRED_ENC_KEY` — Fernet (`python -c "from cryptography.fernet import Fernet; print(Fernet.generate_key().decode())"`)
-- Optional `GTS_OAUTH_ISSUER=https://your-host` (set behind HTTPS reverse proxy)
+### 1. Pass Authorization directly
 
-| Path | Role |
-|------|------|
-| `/.well-known/oauth-authorization-server` | AS metadata |
-| `/.well-known/oauth-protected-resource` | PRM |
-| `/authorize` | Consent page (AK/SK) |
-| `/token` | authorization_code / refresh_token |
-| `/register` | Dynamic client registration (public clients) |
-
-After OAuth, send `Authorization: Bearer <access_token>`.  
-Access **1h**, refresh **30d** (refreshed by the **MCP client**). Server decrypts AK/SK and uses existing `loginV2`.
-
-</details>
-
-<details>
-<summary><b>Header AK/SK (legacy-compatible)</b></summary>
+HTTP:
 
 ```http
-X-GTS-Credentials: {"accessKey":"...","secretKey":"..."}
+Authorization: Bearer <token>
 ```
 
-Or separate `accessKey` / `secretKey` headers.
+stdio: `GTS_AUTHORIZATION` / `AUTHORIZATION`, or local file:
 
-Without credentials, handshake and `tools/list` still work; tool calls return guidance with the open-platform link.
+```json
+{"authorization": "Bearer <token>"}
+```
+
+### 2. AK/SK → loginV2
+
+HTTP credentials header (JSON or Base64), e.g.:
+
+```http
+X-GTS-Credentials: {"accessKey":"<ak>","secretKey":"<sk>"}
+```
+
+Or `accessKey` / `secretKey` headers.
+
+stdio / env: `GTS_ACCESS_KEY` + `GTS_SECRET_KEY`, or local file with the same keys.
+
+The resulting `Authorization` is used for downstream calls and for `get_white_list()`.
 
 </details>
 
 <details>
-<summary><b>Client connection example</b></summary>
+<summary><b>Client example</b></summary>
 
 ```json
 {
   "mcpServers": {
     "gangtise": {
-      "url": "https://<host>:<port>/mcp"
+      "url": "https://<host>:<port>/mcp",
+      "headers": {
+        "Authorization": "Bearer <token>"
+      }
     }
   }
 }
 ```
 
-OAuth-capable clients open `/authorize` after connect. Local stdio: see recommended [`gangtise_mcp`](../mcp/gangtise_mcp/README.md).
-
 </details>
 
 ---
 
-See also: [Docker](docker-deploy.md) · [Overview](../README.md)
+[Docker deploy](docker-deploy.md) · [Overview](../README.md)

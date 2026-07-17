@@ -54,6 +54,7 @@ def load_domain(domain: DomainDef, *, force: bool = False) -> DomainRuntime:
         raise KeyError(f"{domain.tool_name} 缺少 handler: {', '.join(missing)}")
 
     handlers = {n: TOOL_HANDLERS[n] for n in names}
+    # 全量加载；叶子工具按用户白名单裁剪在 list/call 路径进行
     refs = domain_references_dir(domain.package_dir)
     if not refs.is_dir():
         raise FileNotFoundError(f"缺少 references/: {refs}")

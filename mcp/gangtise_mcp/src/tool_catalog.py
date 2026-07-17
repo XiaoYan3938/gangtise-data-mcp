@@ -61,6 +61,7 @@ def load_catalog(*, force: bool = False) -> Catalog:
             for s in load_all_tool_specs(refs):
                 all_specs[s.name] = s
 
+        # 全量注册；按用户白名单的裁剪在 list_tools / call_tool 时进行
         for domain_label, names in DOMAIN_TOOL_NAMES.items():
             for name in names:
                 handler = TOOL_HANDLERS.get(name)
